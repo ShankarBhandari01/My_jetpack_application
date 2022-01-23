@@ -6,11 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -22,7 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Display()
+            LazyFunction()
         }
     }
 }
@@ -38,16 +40,16 @@ fun Display() {
         // horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        for(i in 0..50 )
-        Text(
-            text = "Hello This is JetPack",
-            fontSize = 30.sp,
-            color = Purple200,
-            modifier = Modifier
-                .background(color = Color.Yellow)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
-        )
+        for (i in 0..50)
+            Text(
+                text = "Hello This is JetPack",
+                fontSize = 30.sp,
+                color = Purple200,
+                modifier = Modifier
+                    .background(color = Color.Yellow)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
 
 
         Row(
@@ -68,3 +70,35 @@ fun Display() {
 
 }
 
+@Composable
+fun LazyFunction() {
+    LazyColumn(
+        modifier = Modifier
+            .background(color = Color.Yellow)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        contentPadding = PaddingValues(vertical = 100.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        //single item in lazy column
+        item {
+            LazyRow(
+
+                contentPadding = PaddingValues(horizontal = 100.dp)
+            ) {
+                // single items
+                item {
+                    Text(text = "This is lazy row", fontSize = 30.sp)
+                }
+                items(50) { i ->
+                    Text(text = "This is lamda function $i", fontSize = 40.sp)
+                }
+
+            }
+        }
+        items(50) { i ->
+            Text(text = "This is lamda function $i", fontSize = 30.sp)
+        }
+
+    }
+}
