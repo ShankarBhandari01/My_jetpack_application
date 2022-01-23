@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LazyFunction()
+            BoxExample()
         }
     }
 }
@@ -100,5 +100,24 @@ fun LazyFunction() {
             Text(text = "This is lamda function $i", fontSize = 30.sp)
         }
 
+    }
+}
+
+@Composable
+fun BoxExample() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(0.5f)
+            .background(color = Color.Yellow),
+
+        ) {
+        Text(text = "This is outer box elements", fontSize = 20.sp)
+        Box(
+            modifier = Modifier
+                .fillMaxSize(0.5f)
+                .background(color = Color.Blue),
+        ) {
+            Text(text = "This is inner box elements", fontSize = 20.sp)
+        }
     }
 }
